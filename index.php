@@ -19,13 +19,14 @@ if (isset($_GET['views']))
     <body>
         <?php
             use app\controllers\ViewsController;
-            $view = new ViewsController()->getControllerViews($url[0]);
+            $view = new ViewsController();
+            $viewLoader = $view->getControllerViews($url);
 
-            if($view === 'login' || $view === '404')
+            if($viewLoader === 'login' || $viewLoader === '404')
             {
-                require_once('./app/views/content/' . $view . '-view.php');
+                require_once('./app/views/content/' . $viewLoader . '-view.php');
             }else{
-                require_once($view);
+                require_once($viewLoader);
             }
         ?>
     </body>
